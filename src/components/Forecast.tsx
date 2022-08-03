@@ -61,6 +61,11 @@ const IconDiv = styled.div`
   align-items: center;
   align-content: flex-start;
 `;
+
+const Td = styled.td`
+  text-align: center;
+`;
+
 interface ForecastProps {
   onClick: () => void;
   data: Weather | undefined;
@@ -90,37 +95,44 @@ const Forecast = (props: ForecastProps) => {
       ) : (
         <>
           <Title>Daily Forecast 16 Days</Title>
-          <DataTitles>
-            <p>Date</p>
-            <p>Weather</p>
-            <p>Temp</p>
-            <p>Cloudy</p>
-            <p>Humidity</p>
-            <p>Wind</p>
-          </DataTitles>
-          {forecastData.list.map((day) => (
-            <Data>
-              <p>
-                {new Date(day.dt * 1000).toLocaleString('en-US', {
-                  year: 'numeric',
-                  month: '2-digit',
-                  day: '2-digit',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
-              </p>
-              <IconDiv>
-                <img
-                  src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
-                />
-                <p>{day.weather[0].main}</p>
-              </IconDiv>
-              <p>{day.main.temp.toFixed()}&#176;</p>
-              <p>{day.clouds.all}%</p>
-              <p>{day.main.humidity}%</p>
-              <p>{day.wind.speed}km/h</p>
-            </Data>
-          ))}
+          <table cellPadding="0" cellSpacing="0">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Weather</th>
+                <th>Temp</th>
+                <th>Cloudy</th>
+                <th>Humidity</th>
+                <th>Wind</th>
+              </tr>
+            </thead>
+            <tbody>
+              {forecastData.list.map((day) => (
+                <tr>
+                  <Td>
+                    {new Date(day.dt * 1000).toLocaleString('en-US', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </Td>
+                  <Td>
+                    <img
+                      src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
+                    />
+                    <p>{day.weather[0].main}</p>
+                  </Td>
+
+                  <Td>{day.main.temp.toFixed()}&#176;</Td>
+                  <Td>{day.clouds.all}%</Td>
+                  <Td>{day.main.humidity}%</Td>
+                  <Td>{day.wind.speed}km/h</Td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
           <BackBtn onClick={props.onClick}>Back</BackBtn>
         </>
       )}
