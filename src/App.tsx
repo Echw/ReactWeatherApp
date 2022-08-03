@@ -1,10 +1,11 @@
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
-import './App.css';
+
 import MainData from './components/MainData';
 import Sidebar from './components/Sidebar';
 import styled from 'styled-components';
 import axios from 'axios';
 import Background from './components/Background';
+import Forecast from './components/Forecast';
 
 const AppContainer = styled.div``;
 
@@ -16,9 +17,20 @@ export type Weather = {
   weather: { id: number; main: string; icon: string }[];
 };
 
+export type ForecastData = {
+  list: {
+    dt: number;
+    main: { temp: number; humidity: number };
+    weather: { id: number; main: string; icon: string }[];
+    wind: { speed: number };
+    clouds: { all: number };
+  }[];
+};
+
 function App() {
   const [data, setData] = useState<Weather>();
   const [location, setLocation] = useState('');
+  const [showForecast, setShowForecast] = useState(false);
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.REACT_APP_WEATHER_APP_ID}`;
 
@@ -63,16 +75,23 @@ function App() {
       });
   };
 
+  const onClick = () => setShowForecast((prevValue) => !prevValue);
+
   return (
     <AppContainer>
       <Background icon={data === undefined ? '' : data.weather[0].icon} />
       <MainData data={data} />
-      <Sidebar
-        onCityClick={onCityClick}
-        onChange={searchLocationHandler}
-        onSubmit={onSearchSubmit}
-        data={data}
-      ></Sidebar>
+      {showForecast ? (
+        <Forecast onClick={onClick} data={data} />
+      ) : (
+        <Sidebar
+          onClick={onClick}
+          onCityClick={onCityClick}
+          onChange={searchLocationHandler}
+          onSubmit={onSearchSubmit}
+          data={data}
+        ></Sidebar>
+      )}
     </AppContainer>
   );
 }

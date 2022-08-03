@@ -79,7 +79,7 @@ const MainData = (props: MainDataProps) => {
             </Temp>
             <DateContainer>
               <CityName>{props.data.name}</CityName>
-              <DateTime>18.12 - Friday Jul 29</DateTime>
+              <DateTime>{new Date().toLocaleString('en-US') + ''}</DateTime>
             </DateContainer>
             <IconContainer>
               <Icon

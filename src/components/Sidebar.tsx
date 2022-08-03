@@ -10,19 +10,39 @@ const Container = styled.div`
   height: 100%;
   top: 0;
   right: 0;
-  background: rgba(110, 110, 110, 0.25);
+  background: rgba(110, 110, 110, 0.5);
   box-shadow: 0 0.5rem 2rem 0 rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(0.2rem);
   -webkit-backdrop-filter: blur(0.2rem);
   padding: 2rem;
   color: white;
   overflow-y: scroll;
+  transition: 0.4s;
 `;
+const Btn = styled.button`
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border: none;
+  outline: none;
+  background-color: #fa6d1b;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.4s;
+  align-self: baseline;
+
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
+`;
+
 interface SidebarProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   data: Weather | undefined;
   onCityClick: (city: string) => void;
+  onClick: () => void;
 }
 
 const Sidebar = (props: SidebarProps) => {
@@ -34,6 +54,7 @@ const Sidebar = (props: SidebarProps) => {
         onSubmit={props.onSubmit}
       ></Search>
       <Details data={props.data}></Details>
+      <Btn onClick={props.onClick}>Daily Forecast</Btn>
     </Container>
   );
 };
