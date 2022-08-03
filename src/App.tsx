@@ -3,19 +3,10 @@ import './App.css';
 import MainData from './components/MainData';
 import Sidebar from './components/Sidebar';
 import styled from 'styled-components';
-import imgClear from './photos/day/clearSky.jpg';
 import axios from 'axios';
+import Background from './components/Background';
 
-const AppContainer = styled.div`
-  height: 100vh;
-  background-image: url(${imgClear});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  transition: 500ms;
-  opacity: 1;
-  background-color: #436d92;
-`;
+const AppContainer = styled.div``;
 
 export type Weather = {
   name: string;
@@ -63,11 +54,18 @@ function App() {
   }, []);
 
   const onCityClick = (cityName: string) => {
-    console.log(cityName);
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${process.env.REACT_APP_WEATHER_APP_ID}`
+      )
+      .then((response) => {
+        setData(response.data);
+      });
   };
 
   return (
     <AppContainer>
+      <Background icon={data === undefined ? '' : data.weather[0].icon} />
       <MainData data={data} />
       <Sidebar
         onCityClick={onCityClick}

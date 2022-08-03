@@ -79,9 +79,9 @@ const Search = (props: SearchProps) => {
       </form>
       <List>
         <Text onClick={() => props.onCityClick('Warsaw')}>Warsaw</Text>
-        <Text>London</Text>
-        <Text>New York</Text>
-        <Text>Tokio</Text>
+        <Text onClick={() => props.onCityClick('London')}>London</Text>
+        <Text onClick={() => props.onCityClick('New York')}>New York</Text>
+        <Text onClick={() => props.onCityClick('Tokio')}>Tokio</Text>
       </List>
     </Container>
   );
