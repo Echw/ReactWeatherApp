@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { Weather } from '../App';
 
 const AppContainer = styled.div`
   position: absolute;
@@ -50,30 +51,44 @@ const IconContainer = styled.div`
   flex-direction: column;
   gap: 0.5rem;
 `;
-const Icon = styled(FontAwesomeIcon)`
+const Icon = styled.img`
   height: 2.5rem;
-  opacity: 0.5;
 `;
 const WeatherIcon = styled.span`
   font-weight: 300;
 `;
 
-const MainData = () => {
+interface MainDataProps {
+  data: Weather | undefined;
+}
+
+const MainData = (props: MainDataProps) => {
   return (
     <AppContainer>
       <NavContainer>
         <Logo>ReactWeather</Logo>
       </NavContainer>
       <DataContainer>
-        <Temp>16&#176;</Temp>
-        <DateContainer>
-          <CityName>Warsaw</CityName>
-          <DateTime>18.12 - Friday Jul 29</DateTime>
-        </DateContainer>
-        <IconContainer>
-          <Icon icon={faSun} />
-          <WeatherIcon>Sunny</WeatherIcon>
-        </IconContainer>
+        {props.data === undefined ? (
+          <h2>Not Found</h2>
+        ) : (
+          <>
+            <Temp>
+              {props.data.main.temp.toFixed()}
+              &#176;
+            </Temp>
+            <DateContainer>
+              <CityName>{props.data.name}</CityName>
+              <DateTime>18.12 - Friday Jul 29</DateTime>
+            </DateContainer>
+            <IconContainer>
+              <Icon
+                src={`http://openweathermap.org/img/wn/${props.data.weather[0].icon}.png`}
+              />
+              <WeatherIcon>{props.data.weather[0].main}</WeatherIcon>
+            </IconContainer>
+          </>
+        )}
       </DataContainer>
     </AppContainer>
   );

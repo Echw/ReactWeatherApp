@@ -2,6 +2,7 @@ import React from 'react';
 import Details from './Details';
 import Search from './Search';
 import styled from 'styled-components';
+import { Weather } from '../App';
 
 const Container = styled.div`
   position: absolute;
@@ -20,12 +21,19 @@ const Container = styled.div`
 interface SidebarProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  data: Weather | undefined;
+  onCityClick: (city: string) => void;
 }
+
 const Sidebar = (props: SidebarProps) => {
   return (
     <Container>
-      <Search onChange={props.onChange} onSubmit={props.onSubmit}></Search>
-      <Details></Details>
+      <Search
+        onCityClick={props.onCityClick}
+        onChange={props.onChange}
+        onSubmit={props.onSubmit}
+      ></Search>
+      <Details data={props.data}></Details>
     </Container>
   );
 };

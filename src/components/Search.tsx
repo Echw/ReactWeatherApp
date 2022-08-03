@@ -61,6 +61,7 @@ const Text = styled.li`
 interface SearchProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onCityClick: (city: string) => void;
 }
 
 const Search = (props: SearchProps) => {
@@ -77,10 +78,10 @@ const Search = (props: SearchProps) => {
         </SearchButton>
       </form>
       <List>
-        <Text>Tymianka</Text>
-        <Text>Białytok</Text>
-        <Text>Siemiatycze</Text>
-        <Text>Horodyszcze</Text>
+        <Text onClick={() => props.onCityClick('Warsaw')}>Warsaw</Text>
+        <Text>London</Text>
+        <Text>New York</Text>
+        <Text>Tokio</Text>
       </List>
     </Container>
   );

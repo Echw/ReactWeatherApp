@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Weather } from '../App';
 
 const List = styled.ul`
   list-style-type: none;
@@ -22,21 +23,31 @@ const Li = styled.li`
   display: flex;
   justify-content: space-between;
 `;
-const Details = () => {
+
+interface DataProps {
+  data: Weather | undefined;
+}
+
+const Details = (props: DataProps) => {
   return (
     <List>
       <Title>Weather Details</Title>
       <Li>
         <Text>Cloudy</Text>
-        <Text>70%</Text>
+        <Text>{props.data === undefined ? '?' : props.data.clouds.all}%</Text>
       </Li>
       <Li>
         <Text>Humidity</Text>
-        <Text>70%</Text>
+        <Text>
+          {props.data === undefined ? '?' : props.data.main.humidity}%
+        </Text>
       </Li>
       <Li>
         <Text>Wind</Text>
-        <Text>70%</Text>
+        <Text>
+          {' '}
+          {props.data === undefined ? '?' : props.data.wind.speed}km/h
+        </Text>
       </Li>
     </List>
   );

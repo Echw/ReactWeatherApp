@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useState } from 'react';
+import React, { ChangeEventHandler, useEffect, useState } from 'react';
 import './App.css';
 import MainData from './components/MainData';
 import Sidebar from './components/Sidebar';
@@ -17,11 +17,19 @@ const AppContainer = styled.div`
   background-color: #436d92;
 `;
 
+export type Weather = {
+  name: string;
+  main: { temp: number; humidity: number };
+  clouds: { all: number };
+  wind: { speed: number };
+  weather: { id: number; main: string; icon: string }[];
+};
+
 function App() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState<Weather>();
   const [location, setLocation] = useState('');
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=62b629d08feb233f5648188d349600ae`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.REACT_APP_WEATHER_APP_ID}`;
 
   const searchLocationHandler = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -34,19 +42,38 @@ function App() {
     if (location.trim() === '') {
       return;
     }
-    axios.get(url).then((response) => {
-      setData(response.data);
-      console.log(response.data);
-    });
+    axios
+      .get(url)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((err) => console.error(err));
     setLocation('');
+  };
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?q=Warsaw&units=metric&appid=${process.env.REACT_APP_WEATHER_APP_ID}`
+      )
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const onCityClick = (cityName: string) => {
+    console.log(cityName);
   };
 
   return (
     <AppContainer>
-      <MainData />
+      <MainData data={data} />
       <Sidebar
+        onCityClick={onCityClick}
         onChange={searchLocationHandler}
         onSubmit={onSearchSubmit}
+        data={data}
       ></Sidebar>
     </AppContainer>
   );
