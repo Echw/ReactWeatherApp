@@ -83,8 +83,6 @@ const Forecast = (props: ForecastProps) => {
       .catch((err) => console.error(err));
   }, []);
 
-  console.log(forecastData);
-
   return (
     <Container>
       {forecastData === undefined ? (

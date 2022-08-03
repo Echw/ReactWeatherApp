@@ -29,7 +29,6 @@ interface BackgroundProps {
 }
 
 const getBackgroundImg = (icon: string) => {
-  console.log(icon);
   switch (icon) {
     case '01d':
       return imgClearDay;
