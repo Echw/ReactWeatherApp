@@ -4,6 +4,7 @@ import Search from './Search';
 import styled from 'styled-components';
 import { ForecastData, Weather } from '../App';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const Container = styled.div`
   position: absolute;
@@ -108,7 +109,7 @@ const Forecast = (props: ForecastProps) => {
             </thead>
             <tbody>
               {forecastData.list.map((day) => (
-                <tr>
+                <tr key={day.dt}>
                   <Td>
                     {new Date(day.dt * 1000).toLocaleString('en-US', {
                       year: 'numeric',

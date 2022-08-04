@@ -43,12 +43,14 @@ interface SidebarProps {
   data: Weather | undefined;
   onCityClick: (city: string) => void;
   onClick: () => void;
+  localData: string[];
 }
 
 const Sidebar = (props: SidebarProps) => {
   return (
     <Container>
       <Search
+        localData={props.localData}
         onCityClick={props.onCityClick}
         onChange={props.onChange}
         onSubmit={props.onSubmit}

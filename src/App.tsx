@@ -31,6 +31,13 @@ function App() {
   const [data, setData] = useState<Weather>();
   const [location, setLocation] = useState('');
   const [showForecast, setShowForecast] = useState(false);
+  const [searchData, setSearchData] = useState<string[]>(
+    JSON.parse(localStorage.getItem('locationData') || '[]')
+  );
+
+  useEffect(() => {
+    localStorage.setItem('locationData', JSON.stringify(searchData));
+  }, [searchData]);
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.REACT_APP_WEATHER_APP_ID}`;
 
@@ -51,7 +58,11 @@ function App() {
         setData(response.data);
       })
       .catch((err) => console.error(err));
+    setSearchData((prevValue: string[]) =>
+      [location, ...prevValue].slice(0, 4)
+    );
     setLocation('');
+    event.currentTarget.reset();
   };
 
   useEffect(() => {
@@ -85,6 +96,7 @@ function App() {
         <Forecast onClick={onClick} data={data} />
       ) : (
         <Sidebar
+          localData={searchData}
           onClick={onClick}
           onCityClick={onCityClick}
           onChange={searchLocationHandler}

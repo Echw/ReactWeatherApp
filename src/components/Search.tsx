@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -36,6 +36,7 @@ const Input = styled.input`
   color: #fff;
   font-size: 1rem;
   padding: 0 1rem 1.5rem 0;
+  text-transform: capitalize;
 
   &:focus {
     outline: none;
@@ -53,6 +54,7 @@ const Text = styled.li`
   font-weight: 300;
   margin: 1.5rem 0;
   cursor: pointer;
+  text-transform: capitalize;
 
   &:hover {
     color: #fa6d1b;
@@ -62,6 +64,7 @@ interface SearchProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   onCityClick: (city: string) => void;
+  localData: string[];
 }
 
 const Search = (props: SearchProps) => {
@@ -73,15 +76,16 @@ const Search = (props: SearchProps) => {
           placeholder="Search Location..."
           onChange={props.onChange}
         />
-        <SearchButton>
+        <SearchButton type="submit">
           <Icon icon={faMagnifyingGlass} />
         </SearchButton>
       </form>
       <List>
-        <Text onClick={() => props.onCityClick('Warsaw')}>Warsaw</Text>
-        <Text onClick={() => props.onCityClick('London')}>London</Text>
-        <Text onClick={() => props.onCityClick('New York')}>New York</Text>
-        <Text onClick={() => props.onCityClick('Tokio')}>Tokio</Text>
+        {props.localData.map((city) => (
+          <Text key={city} onClick={() => props.onCityClick(city)}>
+            {city}
+          </Text>
+        ))}
       </List>
     </Container>
   );
