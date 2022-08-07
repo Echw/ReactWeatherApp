@@ -95,7 +95,7 @@ const Forecast = (props: ForecastProps) => {
         <h2>Not Found</h2>
       ) : (
         <>
-          <Title>Daily Forecast 16 Days</Title>
+          <Title>Daily Forecast 5 Days</Title>
           <table cellPadding="0" cellSpacing="0">
             <thead>
               <tr>
