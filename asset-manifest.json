@@ -1,0 +1,20 @@
+{
+  "main.css": "/ReactWeatherApp/static/css/main.ca0705aa.chunk.css",
+  "main.js": "/ReactWeatherApp/static/js/main.ef2fb5c5.chunk.js",
+  "main.js.map": "/ReactWeatherApp/static/js/main.ef2fb5c5.chunk.js.map",
+  "static/js/1.83c02d7c.chunk.js": "/ReactWeatherApp/static/js/1.83c02d7c.chunk.js",
+  "static/js/1.83c02d7c.chunk.js.map": "/ReactWeatherApp/static/js/1.83c02d7c.chunk.js.map",
+  "runtime~main.js": "/ReactWeatherApp/static/js/runtime~main.8ff246e9.js",
+  "runtime~main.js.map": "/ReactWeatherApp/static/js/runtime~main.8ff246e9.js.map",
+  "static/media/cloudySky.jpg": "/ReactWeatherApp/static/media/cloudySky.bb6bcd86.jpg",
+  "static/media/rain.jpg": "/ReactWeatherApp/static/media/rain.342e8571.jpg",
+  "static/media/nightCloudy.jpg": "/ReactWeatherApp/static/media/nightCloudy.72de55ff.jpg",
+  "static/media/nightRain.jpg": "/ReactWeatherApp/static/media/nightRain.2cae6a2d.jpg",
+  "static/media/snow.jpg": "/ReactWeatherApp/static/media/snow.30fe9866.jpg",
+  "static/media/nightSnow.jpg": "/ReactWeatherApp/static/media/nightSnow.f054f94e.jpg",
+  "static/media/clearSky.jpg": "/ReactWeatherApp/static/media/clearSky.fc134501.jpg",
+  "static/css/main.ca0705aa.chunk.css.map": "/ReactWeatherApp/static/css/main.ca0705aa.chunk.css.map",
+  "index.html": "/ReactWeatherApp/index.html",
+  "precache-manifest.cb6a1a550f174976a586966b9f333118.js": "/ReactWeatherApp/precache-manifest.cb6a1a550f174976a586966b9f333118.js",
+  "service-worker.js": "/ReactWeatherApp/service-worker.js"
+}
