@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Details from './Details';
-import Search from './Search';
 import styled from 'styled-components';
-import { ForecastData, Weather } from '../App';
 import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
+import { Weather } from '../utils/types/Weather';
+import { Forecast as ForecastType } from '../utils/types/Forecast';
 
 const Container = styled.div`
   position: absolute;
@@ -27,18 +25,6 @@ const Title = styled.h1`
   padding: 2rem;
 `;
 
-const DataTitles = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 2rem;
-  border-bottom: 1px #ccc solid;
-`;
-const Data = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 2rem 2rem 0 0;
-`;
-
 const BackBtn = styled.button`
   padding: 1.5rem;
   margin: 2rem 0;
@@ -57,12 +43,6 @@ const BackBtn = styled.button`
   }
 `;
 
-const IconDiv = styled.div`
-  display: flex;
-  align-items: center;
-  align-content: flex-start;
-`;
-
 const Td = styled.td`
   text-align: center;
 `;
@@ -73,7 +53,7 @@ interface ForecastProps {
 }
 
 const Forecast = (props: ForecastProps) => {
-  const [forecastData, setForecastData] = useState<ForecastData>();
+  const [forecastData, setForecastData] = useState<ForecastType>();
 
   useEffect(() => {
     if (props.data === undefined) {

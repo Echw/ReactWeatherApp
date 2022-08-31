@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun } from '@fortawesome/free-solid-svg-icons';
-import { Weather } from '../App';
+import { Weather } from '../utils/types/Weather';
 
 const AppContainer = styled.div`
   position: absolute;
@@ -17,8 +15,6 @@ const AppContainer = styled.div`
   padding: 2rem 3rem 4rem 3rem;
   color: white;
 `;
-const NavContainer = styled.div``;
-const Logo = styled.h3``;
 
 const DataContainer = styled.div`
   display: flex;
@@ -65,9 +61,9 @@ interface MainDataProps {
 const MainData = (props: MainDataProps) => {
   return (
     <AppContainer>
-      <NavContainer>
-        <Logo>ReactWeather</Logo>
-      </NavContainer>
+      <div>
+        <h3>ReactWeather</h3>
+      </div>
       <DataContainer>
         {props.data === undefined ? (
           <h2>Not Found</h2>

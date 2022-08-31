@@ -9,8 +9,6 @@ import imgCloudyNight from '../photos/night/nightCloudy.jpg';
 import imgRainNight from '../photos/night/nightRain.jpg';
 import imgSnowNight from '../photos/night/nightSnow.jpg';
 
-import { Weather } from '../App';
-
 const Container = styled.div<{ img: string }>`
   height: 100vh;
   background-image: url(${(props) => props.img});
@@ -22,7 +20,6 @@ const Container = styled.div<{ img: string }>`
   background-color: #436d92;
   z-index: -1;
 `;
-const Img = styled.img``;
 
 interface BackgroundProps {
   icon: string;
@@ -72,11 +69,7 @@ const getBackgroundImg = (icon: string) => {
 };
 
 const Background = (props: BackgroundProps) => {
-  return (
-    <Container img={getBackgroundImg(props.icon)}>
-      <Img></Img>
-    </Container>
-  );
+  return <Container img={getBackgroundImg(props.icon)} />;
 };
 
 export default Background;

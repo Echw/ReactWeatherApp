@@ -6,26 +6,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Background from './components/Background';
 import Forecast from './components/Forecast';
-
-const AppContainer = styled.div``;
-
-export type Weather = {
-  name: string;
-  main: { temp: number; humidity: number };
-  clouds: { all: number };
-  wind: { speed: number };
-  weather: { id: number; main: string; icon: string }[];
-};
-
-export type ForecastData = {
-  list: {
-    dt: number;
-    main: { temp: number; humidity: number };
-    weather: { id: number; main: string; icon: string }[];
-    wind: { speed: number };
-    clouds: { all: number };
-  }[];
-};
+import { Weather } from './utils/types/Weather';
 
 function App() {
   const [data, setData] = useState<Weather>();
@@ -89,7 +70,7 @@ function App() {
   const onClick = () => setShowForecast((prevValue) => !prevValue);
 
   return (
-    <AppContainer>
+    <div>
       <Background icon={data === undefined ? '' : data.weather[0].icon} />
       <MainData data={data} />
       {showForecast ? (
@@ -104,7 +85,7 @@ function App() {
           data={data}
         ></Sidebar>
       )}
-    </AppContainer>
+    </div>
   );
 }
 

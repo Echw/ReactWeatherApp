@@ -2,7 +2,7 @@ import React from 'react';
 import Details from './Details';
 import Search from './Search';
 import styled from 'styled-components';
-import { Weather } from '../App';
+import { Weather } from '../utils/types/Weather';
 
 const Container = styled.div`
   position: absolute;
@@ -55,7 +55,7 @@ const Sidebar = (props: SidebarProps) => {
         onChange={props.onChange}
         onSubmit={props.onSubmit}
       ></Search>
-      <Details data={props.data}></Details>
+      <Details weather={props.data}></Details>
       <Btn onClick={props.onClick}>Daily Forecast</Btn>
     </Container>
   );
