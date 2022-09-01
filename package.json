@@ -1,5 +1,6 @@
 {
   "name": "weather",
+  "description": "Check the actual weather around the world!",
   "version": "0.1.0",
   "private": false,
   "homepage": "https://Echw.github.io/ReactWeatherApp",
