@@ -31,6 +31,12 @@ Go to the project directory
   cd ReactWeatherApp
 ```
 
+Add `.env` file in the root of project and insert
+
+```sh
+REACT_APP_WEATHER_APP_ID=your_openweather_api_id
+```
+
 Install dependencies
 
 ```bash
