@@ -40,22 +40,22 @@ const Btn = styled.button`
 interface SidebarProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  data: Weather | undefined;
+  weather: Weather | undefined;
   onCityClick: (city: string) => void;
   onClick: () => void;
-  localData: string[];
+  citiesHistory: string[];
 }
 
 const Sidebar = (props: SidebarProps) => {
   return (
     <Container>
       <Search
-        localData={props.localData}
+        citiesHistory={props.citiesHistory}
         onCityClick={props.onCityClick}
         onChange={props.onChange}
         onSubmit={props.onSubmit}
       ></Search>
-      <Details weather={props.data}></Details>
+      <Details weather={props.weather}></Details>
       <Btn onClick={props.onClick}>Daily Forecast</Btn>
     </Container>
   );

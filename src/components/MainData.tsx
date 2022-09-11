@@ -55,7 +55,7 @@ const WeatherIcon = styled.span`
 `;
 
 interface MainDataProps {
-  data: Weather | undefined;
+  weather: Weather | undefined;
 }
 
 const MainData = (props: MainDataProps) => {
@@ -65,23 +65,23 @@ const MainData = (props: MainDataProps) => {
         <h3>ReactWeather</h3>
       </div>
       <DataContainer>
-        {props.data === undefined ? (
+        {props.weather === undefined ? (
           <h2>Not Found</h2>
         ) : (
           <>
             <Temp>
-              {props.data.main.temp.toFixed()}
+              {props.weather.main.temp.toFixed()}
               &#176;
             </Temp>
             <DateContainer>
-              <CityName>{props.data.name}</CityName>
+              <CityName>{props.weather.name}</CityName>
               <DateTime>{new Date().toLocaleString('en-US') + ''}</DateTime>
             </DateContainer>
             <IconContainer>
               <Icon
-                src={`http://openweathermap.org/img/wn/${props.data.weather[0].icon}.png`}
+                src={`http://openweathermap.org/img/wn/${props.weather.weather[0].icon}.png`}
               />
-              <WeatherIcon>{props.data.weather[0].main}</WeatherIcon>
+              <WeatherIcon>{props.weather.weather[0].main}</WeatherIcon>
             </IconContainer>
           </>
         )}

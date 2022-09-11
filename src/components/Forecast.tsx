@@ -49,19 +49,19 @@ const Td = styled.td`
 
 interface ForecastProps {
   onClick: () => void;
-  data: Weather | undefined;
+  weather: Weather | undefined;
 }
 
 const Forecast = (props: ForecastProps) => {
   const [forecastData, setForecastData] = useState<ForecastType>();
 
   useEffect(() => {
-    if (props.data === undefined) {
+    if (props.weather === undefined) {
       return;
     }
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${props.data.name}&units=metric&appid=${process.env.REACT_APP_WEATHER_APP_ID}`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${props.weather.name}&units=metric&appid=${process.env.REACT_APP_WEATHER_APP_ID}`
       )
       .then((response) => {
         setForecastData(response.data);

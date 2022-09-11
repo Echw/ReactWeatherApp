@@ -64,7 +64,7 @@ interface SearchProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   onCityClick: (city: string) => void;
-  localData: string[];
+  citiesHistory: string[];
 }
 
 const Search = (props: SearchProps) => {
@@ -81,7 +81,7 @@ const Search = (props: SearchProps) => {
         </SearchButton>
       </form>
       <List>
-        {props.localData.map((city) => (
+        {props.citiesHistory.map((city) => (
           <Text key={city} onClick={() => props.onCityClick(city)}>
             {city}
           </Text>

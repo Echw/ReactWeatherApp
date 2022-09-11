@@ -2,23 +2,22 @@ import React, { ChangeEventHandler, useEffect, useState } from 'react';
 
 import MainData from './components/MainData';
 import Sidebar from './components/Sidebar';
-import styled from 'styled-components';
 import axios from 'axios';
 import Background from './components/Background';
 import Forecast from './components/Forecast';
 import { Weather } from './utils/types/Weather';
 
 function App() {
-  const [data, setData] = useState<Weather>();
-  const [location, setLocation] = useState('');
+  const [weather, setWeather] = useState<Weather>();
+  const [location, setLocation] = useState('Warsaw');
   const [showForecast, setShowForecast] = useState(false);
-  const [searchData, setSearchData] = useState<string[]>(
-    JSON.parse(localStorage.getItem('locationData') || '[]')
+  const [citiesHistory, setCitiesHistory] = useState<string[]>(
+    JSON.parse(localStorage.getItem('citiesHistory') || '[]')
   );
 
   useEffect(() => {
-    localStorage.setItem('locationData', JSON.stringify(searchData));
-  }, [searchData]);
+    localStorage.setItem('citiesHistory', JSON.stringify(citiesHistory));
+  }, [citiesHistory]);
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.REACT_APP_WEATHER_APP_ID}`;
 
@@ -36,10 +35,10 @@ function App() {
     axios
       .get(url)
       .then((response) => {
-        setData(response.data);
+        setWeather(response.data);
       })
       .catch((err) => console.error(err));
-    setSearchData((prevValue: string[]) =>
+    setCitiesHistory((prevValue: string[]) =>
       [location, ...prevValue].slice(0, 4)
     );
     setLocation('');
@@ -48,11 +47,9 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=Warsaw&units=metric&appid=${process.env.REACT_APP_WEATHER_APP_ID}`
-      )
+      .get(url)
       .then((response) => {
-        setData(response.data);
+        setWeather(response.data);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -63,7 +60,7 @@ function App() {
         `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${process.env.REACT_APP_WEATHER_APP_ID}`
       )
       .then((response) => {
-        setData(response.data);
+        setWeather(response.data);
       });
   };
 
@@ -71,18 +68,18 @@ function App() {
 
   return (
     <div>
-      <Background icon={data === undefined ? '' : data.weather[0].icon} />
-      <MainData data={data} />
+      <Background icon={weather === undefined ? '' : weather.weather[0].icon} />
+      <MainData weather={weather} />
       {showForecast ? (
-        <Forecast onClick={onClick} data={data} />
+        <Forecast onClick={onClick} weather={weather} />
       ) : (
         <Sidebar
-          localData={searchData}
+          citiesHistory={citiesHistory}
           onClick={onClick}
           onCityClick={onCityClick}
           onChange={searchLocationHandler}
           onSubmit={onSearchSubmit}
-          data={data}
+          weather={weather}
         ></Sidebar>
       )}
     </div>
