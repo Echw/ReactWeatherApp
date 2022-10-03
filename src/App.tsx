@@ -15,11 +15,20 @@ function App() {
     JSON.parse(localStorage.getItem('citiesHistory') || '[]')
   );
 
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.REACT_APP_WEATHER_APP_ID}`;
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((response) => {
+        setWeather(response.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   useEffect(() => {
     localStorage.setItem('citiesHistory', JSON.stringify(citiesHistory));
   }, [citiesHistory]);
-
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.REACT_APP_WEATHER_APP_ID}`;
 
   const searchLocationHandler = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -45,15 +54,6 @@ function App() {
     event.currentTarget.reset();
   };
 
-  useEffect(() => {
-    axios
-      .get(url)
-      .then((response) => {
-        setWeather(response.data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
   const onCityClick = (cityName: string) => {
     axios
       .get(
@@ -61,7 +61,8 @@ function App() {
       )
       .then((response) => {
         setWeather(response.data);
-      });
+      })
+      .catch((err) => console.error(err));
   };
 
   const onClick = () => setShowForecast((prevValue) => !prevValue);
